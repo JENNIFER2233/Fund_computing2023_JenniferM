@@ -18,17 +18,16 @@
 
 ## Session Management
 
-**File:** `ServerScriptService/Handlers/SessionHandler.luau`
+**File LOcation:** `ServerScriptService/Handlers/SessionHandler.luau`
 
 ### Purpose
 
 - Generate a unique 20-digit `SessionID` for each player on join.
-- Store it as a Player attribute.
-- Prevent players from sharing or overwriting each other’s data.
+- Store it as a Player attribute --> `SessionID` 
 
 ### Key Functions
 
-```lua
+lua
 getTimestampMillis() --> string
 -- Returns the current Unix time in milliseconds.
 
@@ -41,22 +40,18 @@ generateSessionId(player) --> string
 
 
 Player Lifecycle: 
- * Code 
+Code 
 Players.PlayerAdded:Connect(function(player)
     local sessionID = generateSessionId(player)
     player:SetAttribute("SessionID", sessionID)
     print("SessionID for player", player.Name, "is", sessionID)
 end)
 
-
-
----
-
 ## Persistence & Profile Store
 
 ### ProfileStore Module
 
-**Location:** `ServerScriptService/Modules/ProfileStore.luau`
+** File Location:** `ServerScriptService/Modules/ProfileStore.luau`
 
 **Purpose:**  
 Abstract Roblox DataStore V2 into a session-based persistence layer.  
@@ -71,9 +66,10 @@ Handles locking, auto-saving, message queues, versioning, and critical-state det
 | **Messaging** | Cross-server updates via `MessagingService`. |
 | **Signals** | `OnError(message, store, key)`<br>`OnOverwrite(store, key)`<br>`OnCriticalToggle(isCritical)` |
 
----
+
 
 ### Instantiating Profile Store
+
 
 
 local PlayerStore = ProfileStore.New(storeName, templateTable)
